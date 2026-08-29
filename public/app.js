@@ -2,6 +2,46 @@ const socket = io();
 
 let orders = [];
 
+function urlBase64ToUint8Array(base64String) {
+  const padding = '='.repeat((4 - base64String.length % 4) % 4);
+  const base64 = (base64String + padding).replace(/-/g, '+').replace(/_/g, '/');
+  const rawData = atob(base64);
+  return new Uint8Array([...rawData].map(c => c.charCodeAt(0)));
+}
+
+async function setupPushNotifications() {
+  if (!('serviceWorker' in navigator) || !('PushManager' in window)) return;
+  try {
+    const reg = await navigator.serviceWorker.register('/sw.js');
+    const permission = await Notification.requestPermission();
+    if (permission !== 'granted') return;
+    const res = await fetch('/api/vapid-public-key');
+    const { publicKey } = await res.json();
+    const existing = await reg.pushManager.getSubscription();
+    if (existing) {
+      await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(existing)
+      });
+      return;
+    }
+    const sub = await reg.pushManager.subscribe({
+      userVisibleOnly: true,
+      applicationServerKey: urlBase64ToUint8Array(publicKey)
+    });
+    await fetch('/api/subscribe', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(sub)
+    });
+  } catch (err) {
+    console.error('Push setup failed:', err);
+  }
+}
+
+setupPushNotifications();
+
 const tabs = document.querySelectorAll('.tab');
 const views = document.querySelectorAll('.view');
 const notificationEl = document.getElementById('notification');
