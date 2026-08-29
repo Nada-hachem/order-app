@@ -1,0 +1,292 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: #f5f6fa;
+  color: #2c3e50;
+}
+
+#app {
+  max-width: 600px;
+  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-header {
+  background: #2c3e50;
+  color: white;
+  padding: 1rem;
+  text-align: center;
+}
+
+.app-header h1 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.tabs {
+  display: flex;
+  background: white;
+  border-bottom: 1px solid #ddd;
+}
+
+.tab {
+  flex: 1;
+  padding: 0.875rem 0.25rem;
+  border: none;
+  background: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #7f8c8d;
+  cursor: pointer;
+}
+
+.tab.active {
+  color: #2c3e50;
+  border-bottom: 3px solid #3498db;
+}
+
+main {
+  flex: 1;
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+.view {
+  display: none;
+}
+
+.view.active {
+  display: block;
+}
+
+h2 {
+  margin-top: 0;
+  font-size: 1.1rem;
+}
+
+h3 {
+  font-size: 1rem;
+  margin: 1rem 0 0.5rem;
+}
+
+form {
+  background: white;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+label {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+input:focus {
+  outline: none;
+  border-color: #3498db;
+}
+
+.product-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  background: #f8f9fa;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 0.5rem;
+}
+
+.product-row input {
+  margin-bottom: 0;
+}
+
+.product-row input.name {
+  flex: 1 1 100%;
+  min-width: 0;
+  padding: 0.85rem;
+}
+
+.product-row input.qty {
+  flex: 1 1 calc(100% - 80px);
+  min-width: 0;
+  padding: 0.85rem;
+}
+
+.product-row button {
+  flex: 0 0 72px;
+  background: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 0.75rem 0;
+  font-size: 0.8rem;
+  cursor: pointer;
+  white-space: nowrap;
+  width: 72px;
+}
+
+button {
+  font-size: 1rem;
+  padding: 0.85rem;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 0.5rem;
+  font-weight: 600;
+}
+
+button.primary {
+  background: #3498db;
+  color: white;
+}
+
+button.secondary {
+  background: #ecf0f1;
+  color: #2c3e50;
+}
+
+.order-card {
+  background: white;
+  border-radius: 10px;
+  padding: 1rem;
+  margin-bottom: 0.75rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.order-card h3 {
+  margin: 0 0 0.5rem;
+}
+
+.order-card .meta {
+  font-size: 0.8rem;
+  color: #7f8c8d;
+  margin-bottom: 0.5rem;
+}
+
+.order-card ul {
+  margin: 0 0 0.75rem;
+  padding-left: 1.25rem;
+}
+
+.order-card li {
+  margin-bottom: 0.25rem;
+}
+
+.order-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.order-actions button {
+  flex: 1;
+  margin-top: 0;
+  font-size: 0.9rem;
+  padding: 0.6rem;
+}
+
+.order-actions button.complete {
+  background: #27ae60;
+  color: white;
+}
+
+.order-actions button.edit {
+  background: #f39c12;
+  color: white;
+}
+
+.order-actions button.delete {
+  background: #e74c3c;
+  color: white;
+}
+
+.empty {
+  text-align: center;
+  color: #7f8c8d;
+  padding: 2rem;
+}
+
+.notification {
+  position: fixed;
+  bottom: 1rem;
+  left: 1rem;
+  right: 1rem;
+  background: #2c3e50;
+  color: white;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  z-index: 1000;
+  transform: translateY(0);
+  transition: transform 0.3s ease;
+}
+
+.notification.hidden {
+  transform: translateY(150%);
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  z-index: 2000;
+}
+
+.modal.hidden {
+  display: none;
+}
+
+.modal-content {
+  background: white;
+  width: 100%;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+  border-radius: 16px 16px 0 0;
+  padding: 1rem;
+}
+
+.modal-content .actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.modal-content .actions button {
+  flex: 1;
+}
+
+@media (min-width: 600px) {
+  .modal {
+    align-items: center;
+  }
+
+  .modal-content {
+    border-radius: 16px;
+  }
+}

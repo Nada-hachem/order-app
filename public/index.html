@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Order Manager</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <header class="app-header">
+      <h1>Order Manager</h1>
+    </header>
+
+    <nav class="tabs">
+      <button class="tab active" data-tab="new">New Order</button>
+      <button class="tab" data-tab="active">Active Orders</button>
+      <button class="tab" data-tab="history">History</button>
+    </nav>
+
+    <main>
+      <section id="new" class="view active">
+        <h2>Create New Order</h2>
+        <form id="orderForm">
+          <label>Client Name</label>
+          <input type="text" id="clientName" required placeholder="Enter client name">
+
+          <h3>Products</h3>
+          <div id="productsList"></div>
+
+          <button type="button" id="addProduct" class="secondary">+ Add Product</button>
+          <button type="submit" class="primary">Submit Order</button>
+        </form>
+      </section>
+
+      <section id="active" class="view">
+        <h2>Active Orders</h2>
+        <div id="activeOrders"></div>
+      </section>
+
+      <section id="history" class="view">
+        <h2>History</h2>
+        <div id="historyOrders"></div>
+      </section>
+    </main>
+
+    <div id="notification" class="notification hidden"></div>
+    <div id="editModal" class="modal hidden">
+      <div class="modal-content">
+        <h2>Edit Order</h2>
+        <form id="editForm">
+          <input type="hidden" id="editId">
+          <label>Client Name</label>
+          <input type="text" id="editClientName" required>
+
+          <h3>Products</h3>
+          <div id="editProductsList"></div>
+
+          <button type="button" id="editAddProduct" class="secondary">+ Add Product</button>
+          <div class="actions">
+            <button type="button" id="cancelEdit" class="secondary">Cancel</button>
+            <button type="submit" class="primary">Save Changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
