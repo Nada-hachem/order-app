@@ -41,6 +41,11 @@ async function setupPushNotifications() {
 }
 
 setupPushNotifications();
+const enableNotificationsBtn = document.getElementById('enableNotifications');
+
+if (enableNotificationsBtn) {
+  enableNotificationsBtn.addEventListener('click', setupPushNotifications);
+}
 
 const tabs = document.querySelectorAll('.tab');
 const views = document.querySelectorAll('.view');
