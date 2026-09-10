@@ -15,14 +15,19 @@
     🔔 Enable Notifications
   </button>
 </header>
-
+data-tab="new">New Order</button>
     <nav class="tabs">
-      <button class="tab active" data-tab="new">New Order</button>
-      <button class="tab" data-tab="active">Active Orders</button>
+      <button class="tab active" data-tab="active">Active Orders</button>
+      <button class="tab" data-tab="new">New Order</button>
       <button class="tab" data-tab="history">History</button>
     </nav>
 
     <main>
+   <section id="active" class="view">
+        <h2>Active Orders</h2>
+        <div id="activeOrders"></div>
+      </section>
+     
       <section id="new" class="view active">
         <h2>Create New Order</h2>
         <form id="orderForm">
@@ -37,12 +42,7 @@
         </form>
       </section>
 
-      <section id="active" class="view">
-        <h2>Active Orders</h2>
-        <div id="activeOrders"></div>
-      </section>
-
-      <section id="history" class="view">
+           <section id="history" class="view">
         <h2>History</h2>
         <div id="historyOrders"></div>
       </section>
